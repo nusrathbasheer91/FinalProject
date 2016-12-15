@@ -99,13 +99,14 @@ public class RankerFavorite extends Ranker{
 		}
 		//Search movies by Movie
 		else if (mode.equals("movie")){
-			if(_indexerMovie.getMovieIdByName(query._query)!=null){
-				movieList=_indexerMovie.getMovieIdByOnlyName(query._query);
+			movieList=_indexerMovie.getMovieIdByOnlyName(query._query);
+			if(movieList!=null){
 				for (int i = 0; i < movieList.size(); ++i) {
 		    		all.add(scoreMovie(movieList.get(i)));//check if mid
 		    	}
 			}
 			else{
+				movieList = new ArrayList<Integer>();
 				ArrayList<Double> SimilarityScore = new ArrayList<Double>();
 				//for(int i=0;i<all.size() && numResults;i++){
 				//movid=_indexer.getTopMatches(query._query, 10, 0.7, "movie").get(i).getKey();
@@ -133,7 +134,8 @@ public class RankerFavorite extends Ranker{
 		  Rating=mov.getRating();
 		  Year=Integer.parseInt(mov.getYear());
 		  NumRev=mov.getRatingsCount();
-		  double score = _betaRating*Rating+_betaYear*Year+_betaNumReviews*NumRev+_betaSimScore*simScore;
+		  double score = _betaRating*Math.tanh(Rating/10.0)+_betaYear*(Year/15.0)+_betaNumReviews*Math.tanh(NumRev/100000.0)+_betaSimScore*simScore;
+		  score/=(_betaRating+_betaYear+_betaNumReviews+_betaSimScore);
 		  return new ScoredMovie(mov, score);
 	}
 

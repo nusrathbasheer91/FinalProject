@@ -319,10 +319,9 @@ public class IndexerMovie extends Indexer implements Serializable {
 	}
 
 	/**
-	 * Get the movie ID for the corresponding movie name
-	 * 
-	 * @param movieName: The name of the movie
-	 * @return Movie ID if name is found in the index, else null
+	 * Get the movie ids that have the same name
+	 * @param movieName
+	 * @return MovieID List
 	 */
 	public ArrayList<Integer> getMovieIdByOnlyName(String movieName) {
 		ArrayList<Integer> movids= new ArrayList<Integer>();
@@ -336,6 +335,14 @@ public class IndexerMovie extends Indexer implements Serializable {
 		}
 		else return movids;
 	}
+	
+	/**
+	 * Get the movie ID for the corresponding movie name
+	 * 
+	 * @param movieName: The name of the movie
+	 * @return Movie ID if name is found in the index, else null
+	 */
+
 	
 	public Integer getMovieIdByName(String movieName) {//and YEAR
 		if (_movieToMovieIDIndex.containsKey(movieName)) {

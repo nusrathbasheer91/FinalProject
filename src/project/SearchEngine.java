@@ -31,7 +31,7 @@ public class SearchEngine {
     
     // The parameter to be used in Ranker.
     private static final String[] BETA_PARAMS={
-    		"beta_rat", "beta_yr", "beta_numrev"
+    		"beta_rat", "beta_yr", "beta_numrev", "beta_simscore"
     };
     public Map<String, Float> _betaValues;
 
